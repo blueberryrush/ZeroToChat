@@ -1,0 +1,332 @@
+{
+  "ok": false,
+  "strict": false,
+  "browserSkipped": false,
+  "lint": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 5,
+    "infoCount": 0,
+    "findings": [
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<section id=\"cabinet-scene\"> is a timeline element that contains nested <div id=\"cabinet\">. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#cabinet-scene",
+        "dataAttributes": {},
+        "sourceFile": "C:\\Users\\Anushka Gupta\\OneDrive\\Documents\\comethack\\zerotochat\\brag-output\\composition\\index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <section id=\"cabinet-scene\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<section id=\"city-scene\"> is a timeline element that contains nested <div>. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#city-scene",
+        "dataAttributes": {},
+        "sourceFile": "C:\\Users\\Anushka Gupta\\OneDrive\\Documents\\comethack\\zerotochat\\brag-output\\composition\\index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <section id=\"city-scene\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<section id=\"cafe-scene\"> is a timeline element that contains nested <div>. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#cafe-scene",
+        "dataAttributes": {},
+        "sourceFile": "C:\\Users\\Anushka Gupta\\OneDrive\\Documents\\comethack\\zerotochat\\brag-output\\composition\\index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <section id=\"cafe-scene\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<section id=\"booth-scene\"> is a timeline element that contains nested <div>. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#booth-scene",
+        "dataAttributes": {},
+        "sourceFile": "C:\\Users\\Anushka Gupta\\OneDrive\\Documents\\comethack\\zerotochat\\brag-output\\composition\\index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <section id=\"booth-scene\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<section id=\"outro-scene\"> is a timeline element that contains nested <div id=\"outro-marquee\">. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#outro-scene",
+        "dataAttributes": {},
+        "sourceFile": "C:\\Users\\Anushka Gupta\\OneDrive\\Documents\\comethack\\zerotochat\\brag-output\\composition\\index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <section id=\"outro-scene\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      }
+    ],
+    "filesScanned": 1
+  },
+  "runtime": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 1,
+    "infoCount": 0,
+    "findings": [
+      {
+        "code": "clip_media_fit",
+        "severity": "warning",
+        "message": "Audio \"selection-click\" is 0.01s but its slot (data-duration) is 0.15s — the slot is shortened to the media length when rendered. Set data-duration to ~0.01s if that isn't intended.",
+        "selector": "[data-composition-id]",
+        "dataAttributes": {
+          "data-composition-id": "main",
+          "data-start": "0",
+          "data-duration": "23.5",
+          "data-width": "1920",
+          "data-height": "1080"
+        },
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "time": 0
+      }
+    ]
+  },
+  "layout": {
+    "ok": false,
+    "errorCount": 1,
+    "warningCount": 2,
+    "infoCount": 0,
+    "findings": [
+      {
+        "code": "text_box_overflow",
+        "severity": "error",
+        "time": 1.306,
+        "selector": "#cabinet-title",
+        "message": "Text extends outside its nearest visual/container box.",
+        "rect": {
+          "left": 630.13,
+          "top": 75.5,
+          "right": 1289.88,
+          "bottom": 173.5,
+          "width": 659.75,
+          "height": 98
+        },
+        "containerSelector": "header.marquee",
+        "text": "PIXEL HAVEN",
+        "fixHint": "Text is 660px x 98px inside 1724px x 218px and overflows by up to 8px; increase the container height to at least ~226px, or allow wrapping with max-width/fitTextFontSize.",
+        "containerRect": {
+          "left": 98,
+          "top": 83,
+          "right": 1822,
+          "bottom": 301,
+          "width": 1724,
+          "height": 218
+        },
+        "overflow": {
+          "top": 7.5
+        },
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 630.13,
+          "y": 75.5,
+          "width": 659.75,
+          "height": 98
+        },
+        "firstSeen": 1.306,
+        "lastSeen": 3.917,
+        "occurrences": 2,
+        "heldMs": 0,
+        "times": [
+          1.306,
+          3.917
+        ]
+      },
+      {
+        "code": "container_overflow",
+        "severity": "warning",
+        "time": 1.306,
+        "selector": "#cabinet-title",
+        "message": "Element extends outside a clipping layout container.",
+        "rect": {
+          "left": 630.13,
+          "top": 76,
+          "right": 1289.88,
+          "bottom": 174,
+          "width": 659.75,
+          "height": 98
+        },
+        "containerSelector": "header.marquee",
+        "fixHint": "Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 98,
+          "top": 83,
+          "right": 1822,
+          "bottom": 301,
+          "width": 1724,
+          "height": 218
+        },
+        "overflow": {
+          "top": 7
+        },
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 630.13,
+          "y": 76,
+          "width": 659.75,
+          "height": 98
+        },
+        "firstSeen": 1.306,
+        "lastSeen": 3.917,
+        "occurrences": 2,
+        "heldMs": 0,
+        "times": [
+          1.306,
+          3.917
+        ]
+      },
+      {
+        "code": "container_overflow",
+        "severity": "warning",
+        "time": 1.306,
+        "selector": "header.marquee > p:nth-of-type(1)",
+        "message": "Element extends outside a clipping layout container.",
+        "rect": {
+          "left": 646.95,
+          "top": 290.66,
+          "right": 1273.03,
+          "bottom": 336.66,
+          "width": 626.08,
+          "height": 46
+        },
+        "containerSelector": "header.marquee",
+        "fixHint": "Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 98,
+          "top": 83,
+          "right": 1822,
+          "bottom": 301,
+          "width": 1724,
+          "height": 218
+        },
+        "overflow": {
+          "bottom": 35.66
+        },
+        "dataAttributes": {},
+        "sourceFile": "index.html",
+        "bbox": {
+          "x": 646.95,
+          "y": 290.66,
+          "width": 626.08,
+          "height": 46
+        },
+        "firstSeen": 1.306,
+        "lastSeen": 3.917,
+        "occurrences": 2,
+        "heldMs": 0,
+        "times": [
+          1.306,
+          3.917
+        ]
+      }
+    ],
+    "duration": 23.5,
+    "samples": [
+      1.306,
+      3.917,
+      6.528,
+      9.139,
+      11.75,
+      14.361,
+      16.972,
+      19.583,
+      22.194
+    ],
+    "transitionSamples": [],
+    "transitionSamplesDropped": 0,
+    "tolerance": 2,
+    "totalIssueCount": 3,
+    "truncated": false
+  },
+  "motion": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "enabled": true,
+    "specPath": "C:\\Users\\Anushka Gupta\\OneDrive\\Documents\\comethack\\zerotochat\\brag-output\\composition\\index.motion.json",
+    "samples": 300
+  },
+  "contrast": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "enabled": true,
+    "samples": [
+      1.306,
+      6.528,
+      11.75,
+      16.972,
+      22.194
+    ],
+    "checked": 37,
+    "passed": 37
+  },
+  "hdr": {
+    "autoPromotion": null,
+    "inspection": "available"
+  },
+  "snapshots": {
+    "enabled": true,
+    "files": [
+      ".hyperframes\\artifacts\\snapshots\\812809fd-abce-42e8-9373-1b01af0e677d\\frame-00-at-1.3s.png",
+      ".hyperframes\\artifacts\\snapshots\\812809fd-abce-42e8-9373-1b01af0e677d\\frame-01-at-6.5s.png",
+      ".hyperframes\\artifacts\\snapshots\\812809fd-abce-42e8-9373-1b01af0e677d\\frame-02-at-11.8s.png",
+      ".hyperframes\\artifacts\\snapshots\\812809fd-abce-42e8-9373-1b01af0e677d\\frame-03-at-17.0s.png",
+      ".hyperframes\\artifacts\\snapshots\\812809fd-abce-42e8-9373-1b01af0e677d\\frame-04-at-22.2s.png"
+    ],
+    "times": [
+      1.306,
+      6.528,
+      11.75,
+      16.972,
+      22.194
+    ],
+    "findingFiles": [
+      "C:\\Users\\Anushka Gupta\\OneDrive\\Documents\\comethack\\zerotochat\\brag-output\\composition\\.hyperframes\\artifacts\\snapshots\\812809fd-abce-42e8-9373-1b01af0e677d\\finding-00-text_box_overflow.png"
+    ]
+  }
+}

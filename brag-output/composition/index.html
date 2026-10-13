@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, height=1080">
+    <title>Pixel Haven — Brag Demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      :root {
+        --ink: #0a0713;
+        --night: #05060f;
+        --panel: #170f1c;
+        --panel-edge: #3b2f45;
+        --cream: #fef3c7;
+        --gold: #fcd34d;
+        --amber: #f59e0b;
+        --green: #22c55e;
+        --mint: #34d399;
+        --lavender: #c4b5fd;
+        --rose: #fb7185;
+        --cyan: #22d3ee;
+        color: var(--cream);
+        font-family: "Space Mono", monospace;
+        font-synthesis: none;
+      }
+      * { box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; margin: 0; overflow: hidden; background: var(--night); }
+      body { color: var(--cream); }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--night); }
+      .scene { position: absolute; inset: 0; overflow: hidden; }
+      .sprite-library { position: absolute; width: 0; height: 0; overflow: hidden; }
+      .pixel-sprite { display: block; shape-rendering: crispEdges; image-rendering: pixelated; overflow: visible; }
+      .scanlines { position: absolute; inset: 0; z-index: 20; pointer-events: none; opacity: .24; background: repeating-linear-gradient(180deg, transparent 0 3px, rgba(0,0,0,.25) 3px 4px); }
+      .vignette { position: absolute; inset: 0; z-index: 19; pointer-events: none; background: radial-gradient(ellipse at center, transparent 45%, rgba(0,0,0,.5) 100%); }
+      .micro-label { font-size: 20px; font-weight: 700; line-height: 1.25; }
+
+      .select-scene { display: grid; place-items: center; padding: 72px; background: radial-gradient(circle at 50% 22%, #3a1c3e 0%, #1a0f24 42%, #0a0713 100%); }
+      .cabinet { position: relative; width: 1740px; height: 930px; display: flex; flex-direction: column; overflow: hidden; border: 8px solid #3b2418; border-radius: 16px; background: #150e1d; box-shadow: 0 28px 70px rgba(0,0,0,.72), inset 0 0 42px rgba(0,0,0,.42); }
+      .marquee { position: relative; flex: 0 0 258px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; overflow: hidden; border-bottom: 6px solid #08050a; background: #341500; }
+      .marquee-lights { position: absolute; inset: 0; opacity: .25; background-image: radial-gradient(circle, #fde047 0 3px, transparent 4px); background-size: 36px 36px; }
+      .wordmark { position: relative; z-index: 1; color: var(--gold); font-size: 82px; font-weight: 700; line-height: 1; text-shadow: 0 0 24px rgba(245,158,11,.65), 7px 7px 0 #08050a; }
+      .tagline { position: relative; z-index: 1; color: #fdba74; font-size: 27px; font-weight: 700; line-height: 1.25; }
+      .cabinet-body { min-height: 0; flex: 1; display: flex; flex-direction: column; padding: 26px 38px 34px; }
+      .roster-hint { margin: 0 0 24px; color: var(--lavender); text-align: center; font-size: 25px; font-weight: 700; }
+      .roster { min-height: 0; flex: 1; display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+      .char-card { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; overflow: hidden; border: 4px solid var(--panel-edge); border-radius: 8px; background: #1b1220; color: var(--cream); text-align: center; }
+      .char-card.selected { border-color: var(--mint); background: #20172a; box-shadow: 0 0 0 3px rgba(0,0,0,.62), 0 0 34px rgba(52,211,153,.32); }
+      .char-card svg { width: 138px; height: 204px; margin-bottom: 4px; }
+      .char-name { color: #fff; font-size: 36px; font-weight: 700; }
+      .char-gender { color: #d4d4d8; font-size: 22px; }
+      .char-title { font-size: 22px; font-weight: 700; }
+      .char-card.alex .char-title { color: var(--mint); }
+      .char-card.maya .char-title { color: var(--rose); }
+      .char-card.chloe .char-title { color: #ddd6fe; }
+      .char-card.leo .char-title { color: var(--cyan); }
+      .selected-tag { position: absolute; top: 18px; right: 18px; padding: 7px 12px; border: 2px solid #08110c; background: var(--mint); color: #052517; font-size: 16px; font-weight: 700; }
+      .spawn-button { position: relative; z-index: 3; width: 100%; min-height: 94px; margin-top: 26px; border: 5px solid #07150b; border-radius: 8px; background: linear-gradient(180deg, #22c55e, #15803d); box-shadow: 0 7px 0 #04210f, 0 0 30px rgba(34,197,94,.24); color: #04210f; font: 700 31px/1.2 "Space Mono", monospace; }
+      .spawn-ripple { position: absolute; top: 50%; left: 50%; z-index: 2; width: 58px; height: 58px; border: 4px solid #dcfce7; border-radius: 50%; opacity: 0; pointer-events: none; }
+      .cursor { position: absolute; top: 77%; left: 76%; z-index: 8; width: 48px; height: 62px; filter: drop-shadow(3px 4px 0 #000); }
+
+      .city-scene { background: #0a0c20; }
+      .city-sky { position: absolute; inset: 0 0 40%; background: linear-gradient(180deg, #060814, #0d0f2e 54%, #1e1b4b); }
+      .moon-glow { position: absolute; top: 5%; right: 9%; width: 220px; height: 220px; border-radius: 50%; background: radial-gradient(circle, rgba(253,224,71,.28), rgba(253,224,71,.07) 38%, transparent 72%); }
+      .moon { position: absolute; top: 8%; right: 12%; width: 90px; height: 90px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fffbeb, #fde68a 68%, #fcd34d); box-shadow: 0 0 38px 9px rgba(253,224,71,.42); }
+      .starfield { position: absolute; inset: 0 0 48%; opacity: .72; background-image: radial-gradient(circle, #fef9c3 0 2px, transparent 3px), radial-gradient(circle, #c4b5fd 0 1px, transparent 2px); background-size: 117px 93px, 173px 131px; background-position: 14px 24px, 55px 9px; }
+      .skyline { position: absolute; right: 0; bottom: 40%; left: 0; height: 34%; }
+      .building { position: absolute; bottom: 0; border-top: 4px solid #28345d; background: #10152f; }
+      .building::after { position: absolute; inset: 18px 12px; content: ""; background: repeating-linear-gradient(90deg, #fbbf24 0 8px, transparent 8px 34px), repeating-linear-gradient(180deg, transparent 0 8px, rgba(251,191,36,.78) 8px 15px, transparent 15px 37px); opacity: .56; }
+      .building.one { left: 2%; width: 16%; height: 58%; }
+      .building.two { left: 18%; width: 12%; height: 88%; }
+      .building.three { left: 31%; width: 19%; height: 66%; }
+      .building.four { left: 51%; width: 14%; height: 94%; }
+      .building.five { left: 66%; width: 13%; height: 70%; }
+      .building.six { right: 0; width: 20%; height: 84%; }
+      .shopfront { position: absolute; bottom: 40%; display: flex; flex-direction: column; align-items: stretch; width: 22%; height: 33%; border: 6px solid #080611; border-bottom-width: 4px; background: #2b1530; box-shadow: inset 0 0 24px rgba(0,0,0,.55); }
+      .shopfront.left { left: 8%; }
+      .shopfront.cafe { right: 8%; width: 27%; border-color: #120902; background: #3a1c0c; }
+      .shop-sign { display: grid; min-height: 72px; place-items: center; border-bottom: 5px solid #080611; background: #571d16; color: #ffd88a; font-size: 27px; font-weight: 700; text-shadow: 0 0 14px rgba(245,158,11,.82); }
+      .shopfront.left .shop-sign { background: #26215c; color: #c4b5fd; }
+      .shop-window { flex: 1; margin: 16px; border: 5px solid #130d20; background: linear-gradient(180deg, rgba(253,224,71,.17), rgba(245,158,11,.28)); }
+      .shop-door { position: absolute; bottom: 0; left: 39%; width: 22%; height: 42%; border: 5px solid #120902; border-bottom: 0; background: #251206; }
+      .sidewalk { position: absolute; right: 0; bottom: 30%; left: 0; height: 10%; border-top: 5px solid #2b2536; border-bottom: 6px solid #241f30; background: repeating-linear-gradient(90deg, rgba(255,255,255,.07) 0 3px, transparent 3px 74px), #3a3348; }
+      .road { position: absolute; right: 0; bottom: 0; left: 0; height: 30%; border-top: 5px solid #2c2f3d; background: #11131b; }
+      .road::before { position: absolute; top: 44%; right: 0; left: 0; height: 6px; content: ""; background: repeating-linear-gradient(90deg, #f8fafc 0 52px, transparent 52px 118px); opacity: .5; }
+      .lamp { position: absolute; bottom: 40%; z-index: 2; width: 9px; height: 120px; background: #5b5867; }
+      .lamp::before { position: absolute; top: -13px; left: -10px; width: 28px; height: 20px; border-radius: 50%; content: ""; background: #fbbf24; box-shadow: 0 0 34px 14px rgba(251,191,36,.68); }
+      .lamp-a { left: 4%; }
+      .lamp-b { left: 35%; }
+      .lamp-c { right: 4%; }
+      .city-title { position: absolute; top: 8%; left: 7%; z-index: 4; color: #fef3c7; font-size: 32px; text-shadow: 3px 3px 0 #05060f; }
+      .city-hint { position: absolute; right: 5%; bottom: 6%; z-index: 6; padding: 16px 22px; border: 3px solid #5c3a1e; background: rgba(8,6,14,.9); color: #ffe9b0; font-size: 22px; }
+      .street-avatar { position: absolute; bottom: 13%; left: 12%; z-index: 5; width: 150px; height: 220px; filter: drop-shadow(0 10px 8px rgba(0,0,0,.52)); }
+      .city-hud { position: absolute; top: 0; right: 0; left: 0; z-index: 7; display: flex; justify-content: space-between; align-items: center; padding: 24px 40px; border-bottom: 4px solid #3b2418; background: rgba(12,8,19,.94); }
+      .city-logo { color: var(--gold); font-size: 23px; font-weight: 700; }
+      .city-states { display: flex; gap: 12px; }
+      .city-state { padding: 10px 15px; border: 2px solid #493d50; color: #d6d3d1; font-size: 18px; }
+      .city-state.on { border-color: var(--amber); color: var(--gold); }
+
+      .cafe-scene { background: #241108; }
+      .cafe-wall { position: absolute; inset: 0 0 60%; border-bottom: 9px solid #150702; background: repeating-linear-gradient(90deg, rgba(0,0,0,.24) 0 4px, transparent 4px 76px), #341809; }
+      .cafe-sign { position: absolute; top: 13%; left: 50%; transform: translateX(-50%); color: #ffd88a; font-size: 37px; font-weight: 700; text-shadow: 0 0 20px rgba(245,158,11,.72), 4px 4px 0 #130902; }
+      .shelf { position: absolute; top: 22%; left: 7%; display: flex; gap: 24px; color: #d3a46f; font-size: 54px; }
+      .cafe-trim { position: absolute; top: 49%; right: 0; left: 0; height: 20px; border-top: 4px solid #8a5227; border-bottom: 4px solid #3d1f0c; background: #6b3d1c; }
+      .cafe-floor { position: absolute; inset: 40% 0 0; background: repeating-linear-gradient(90deg, rgba(0,0,0,.26) 0 4px, transparent 4px 104px), repeating-linear-gradient(0deg, rgba(0,0,0,.16) 0 4px, transparent 4px 72px), #3a1c0e; }
+      .pendant { position: absolute; top: 0; width: 5px; height: 165px; background: #1a0d04; }
+      .pendant::before { position: absolute; bottom: -6px; left: -28px; width: 62px; height: 30px; border: 4px solid #1a0d04; border-radius: 50% 50% 6px 6px; content: ""; background: #7a3f1a; }
+      .pendant::after { position: absolute; bottom: -20px; left: -5px; width: 15px; height: 15px; border-radius: 50%; content: ""; background: #fff6d0; box-shadow: 0 0 32px 15px rgba(251,191,36,.5); }
+      .pendant.a { left: 18%; }
+      .pendant.b { left: 50%; }
+      .pendant.c { right: 18%; }
+      .counter { position: absolute; right: 8%; bottom: 34%; left: 8%; z-index: 2; height: 24%; border: 6px solid #1a0d04; background: #4a2610; box-shadow: inset 0 22px 0 #8a5227; }
+      .espresso { position: absolute; bottom: 100%; left: 17%; width: 154px; height: 118px; border: 6px solid #1a0d04; background: linear-gradient(180deg, #a3a6b1 0 23%, #555964 23%); }
+      .espresso::before { position: absolute; top: 38px; left: 24px; width: 20px; height: 20px; border-radius: 50%; content: ""; background: #f59e0b; box-shadow: 56px 0 #f59e0b, 0 0 12px #f59e0b, 56px 0 12px #f59e0b; }
+      .pastry-case { position: absolute; right: 17%; bottom: 100%; width: 236px; height: 118px; border: 6px solid #1a0d04; background: rgba(255,247,214,.2); }
+      .pastry-case::before { position: absolute; inset: 18px; content: "🥐　🍰　🍩"; color: #fff7d6; font-size: 37px; }
+      .counter-front { position: absolute; inset: 35% 0 0; display: flex; align-items: center; justify-content: center; border-top: 5px solid #1a0d04; color: #fdba74; font-size: 27px; }
+      .vip-table { position: absolute; right: 26%; bottom: 13%; z-index: 5; width: 380px; height: 180px; }
+      .table-top { position: absolute; top: 27%; right: 0; left: 0; height: 48px; border: 6px solid #2a1206; border-radius: 7px; background: #9a5728; box-shadow: 0 17px 0 #3d1f0c; }
+      .table-leg { position: absolute; top: 53%; left: 46%; width: 34px; height: 76px; border: 5px solid #2a1206; border-top: 0; background: #5a2410; }
+      .vip-chair { position: absolute; bottom: 0; width: 92px; height: 132px; border: 6px solid #2a0f04; border-radius: 16px 16px 8px 8px; background: linear-gradient(180deg, #8a3b1a, #4a1c0a); }
+      .vip-chair.left { left: -95px; }
+      .vip-chair.right { right: -95px; }
+      .cafe-avatar { position: absolute; bottom: 10%; left: 18%; z-index: 6; width: 140px; height: 210px; filter: drop-shadow(0 8px 7px rgba(0,0,0,.48)); }
+      .join-prompt { position: absolute; right: 23%; bottom: 43%; z-index: 8; display: flex; align-items: center; gap: 16px; padding: 18px 24px; border: 4px solid var(--amber); background: rgba(8,6,14,.94); box-shadow: 0 0 28px rgba(245,158,11,.38); color: #fde68a; font-size: 26px; font-weight: 700; }
+      .join-key { display: grid; width: 50px; height: 50px; place-items: center; border: 4px solid #080611; background: var(--amber); color: #2b1602; }
+
+      .booth-scene { background: radial-gradient(ellipse at 50% 32%, #3a1c0c, #1c0d05 56%, #0a0503); }
+      .booth-glow { position: absolute; top: -10%; left: 22%; width: 56%; height: 85%; background: radial-gradient(ellipse at top, rgba(255,214,140,.23), transparent 65%); }
+      .booth-tag { position: absolute; top: 50px; left: 70px; z-index: 2; color: var(--gold); font-size: 25px; font-weight: 700; text-shadow: 0 0 16px rgba(245,158,11,.55); }
+      .booth-stage { position: absolute; top: 10%; right: 9%; bottom: 37%; left: 9%; z-index: 2; display: grid; grid-template-columns: 1fr 430px 1fr; align-items: end; justify-items: center; }
+      .booth-person { position: relative; display: flex; height: 100%; flex-direction: column; align-items: center; justify-content: end; gap: 12px; }
+      .booth-person svg { position: relative; z-index: 2; width: 190px; height: 280px; filter: drop-shadow(0 9px 9px rgba(0,0,0,.52)); }
+      .booth-chairback { position: absolute; bottom: 7px; width: 260px; height: 245px; border: 8px solid #2a0f04; border-radius: 34px 34px 15px 15px; background: linear-gradient(180deg, #8a3b16, #4a1c0a); box-shadow: inset 0 12px 0 rgba(255,255,255,.06), 0 18px 35px rgba(0,0,0,.5); }
+      .booth-name { position: relative; z-index: 3; font-size: 27px; font-weight: 700; text-shadow: 3px 3px 0 #000; }
+      .booth-name.alex { color: var(--mint); }
+      .booth-name.maya { color: var(--rose); }
+      .booth-table { position: relative; width: 430px; height: 190px; margin-bottom: 70px; }
+      .booth-table-surface { position: absolute; top: 43%; right: -10%; left: -10%; height: 75px; border: 7px solid #2a1206; border-radius: 12px; background: #90542b; box-shadow: 0 16px 0 #3d1f0c, inset 0 7px 0 rgba(255,255,255,.12); }
+      .mug { position: absolute; top: 18%; z-index: 3; width: 92px; height: 82px; border: 7px solid #241108; border-radius: 5px 5px 20px 20px; background: #f5f0df; box-shadow: inset 0 -17px 0 #c7bd9e; }
+      .mug::after { position: absolute; top: 13px; right: -28px; width: 28px; height: 36px; border: 7px solid #f5f0df; border-left: 0; border-radius: 0 18px 18px 0; content: ""; }
+      .mug.left { left: 20%; }
+      .mug.right { right: 20%; }
+      .steam { position: absolute; top: -35px; left: 32px; width: 18px; height: 46px; border-left: 4px solid rgba(255,243,199,.75); border-radius: 50%; opacity: 0; }
+      .steam.two { left: 58px; top: -26px; }
+      .dialogue { position: absolute; right: 17%; bottom: 7%; left: 17%; z-index: 5; overflow: hidden; border: 5px solid #5c2c15; border-radius: 8px; background: rgba(10,6,3,.95); box-shadow: 0 0 38px rgba(0,0,0,.55), inset 0 0 30px rgba(0,0,0,.45); }
+      .dialogue-head { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 20px 24px; border-bottom: 4px solid #3d1f0c; background: #241108; }
+      .dialogue-title { color: var(--gold); font-size: 25px; font-weight: 700; }
+      .sample-label { padding: 8px 12px; border: 2px solid var(--rose); color: #fecdd3; font-size: 17px; font-weight: 700; white-space: nowrap; }
+      .dialogue-lines { display: flex; min-height: 128px; flex-direction: column; justify-content: center; gap: 14px; padding: 18px 28px; font-size: 31px; }
+      .message { display: flex; gap: 14px; align-items: baseline; }
+      .message .name.alex { color: var(--cyan); }
+      .message .name.maya { color: var(--rose); }
+      .message .text { color: #f5f5f4; }
+
+      .outro-scene { display: grid; place-items: center; padding: 70px; background: radial-gradient(circle at 50% 44%, #381909, #120a10 68%, #05060f); }
+      .outro-marquee { position: relative; display: flex; width: 1660px; height: 780px; flex-direction: column; align-items: center; justify-content: center; gap: 30px; overflow: hidden; border: 8px solid #3b2418; border-radius: 16px; background: #281101; box-shadow: inset 0 0 0 6px #08050a, 0 28px 70px rgba(0,0,0,.55); }
+      .outro-marquee .wordmark { font-size: 116px; }
+      .outro-marquee .tagline { font-size: 32px; }
+      .outro-studs { position: absolute; inset: 24px; opacity: .3; background-image: radial-gradient(circle, #fde047 0 3px, transparent 4px); background-size: 48px 48px; }
+      .outro-mark { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 28px; }
+
+      @media (prefers-reduced-motion: reduce) { .scanlines, .vignette { animation: none; } }
+    </style>
+  </head>
+  <body>
+    <div data-hf-id="hf-2emo" id="root" data-composition-id="main" data-start="0" data-duration="23.5" data-width="1920" data-height="1080">
+      <svg data-hf-id="hf-yfu9" class="sprite-library" aria-hidden="true" focusable="false">
+        <symbol data-hf-id="hf-t2pr" id="sprite-alex" viewBox="0 0 20 28">
+          <rect data-hf-id="hf-4gcf" x="6" y="18" width="3" height="5" fill="#2f68e0" /><rect data-hf-id="hf-o1xn" x="11" y="18" width="3" height="5" fill="#2f68e0" /><rect data-hf-id="hf-fp8l" x="5" y="23" width="4" height="2" fill="#f8fafc" /><rect data-hf-id="hf-nn9q" x="11" y="23" width="4" height="2" fill="#f8fafc" />
+          <rect data-hf-id="hf-k84h" x="4" y="12" width="12" height="7" fill="#12a870" /><rect data-hf-id="hf-pk25" x="3" y="13" width="3" height="6" fill="#0a7a54" /><rect data-hf-id="hf-ihl5" x="14" y="13" width="3" height="6" fill="#0a7a54" /><rect data-hf-id="hf-iw7u" x="8" y="13" width="1" height="4" fill="#5eead4" /><rect data-hf-id="hf-esx8" x="11" y="13" width="1" height="4" fill="#5eead4" />
+          <rect data-hf-id="hf-ip8s" x="5" y="4" width="10" height="9" fill="#f7c9a0" /><rect data-hf-id="hf-p7ww" x="4" y="7" width="1" height="3" fill="#f7c9a0" /><rect data-hf-id="hf-wsvk" x="15" y="7" width="1" height="3" fill="#f7c9a0" /><rect data-hf-id="hf-dqo3" x="6" y="1" width="3" height="4" fill="#f6c445" /><rect data-hf-id="hf-czx9" x="10" y="0" width="4" height="5" fill="#f6c445" /><rect data-hf-id="hf-xn3s" x="14" y="3" width="3" height="3" fill="#cf9a1c" /><rect data-hf-id="hf-ra63" x="7" y="7" width="2" height="2" fill="#fff" /><rect data-hf-id="hf-lopz" x="12" y="7" width="2" height="2" fill="#fff" /><rect data-hf-id="hf-ujoy" x="8" y="8" width="1" height="2" fill="#2f6fdb" /><rect data-hf-id="hf-8x9j" x="12" y="8" width="1" height="2" fill="#2f6fdb" /><rect data-hf-id="hf-z1ht" x="9" y="11" width="3" height="1" fill="#9a4a3a" />
+        </symbol>
+        <symbol data-hf-id="hf-yejr" id="sprite-maya" viewBox="0 0 20 28">
+          <rect data-hf-id="hf-7oab" x="6" y="18" width="3" height="5" fill="#3f4657" /><rect data-hf-id="hf-8yvz" x="11" y="18" width="3" height="5" fill="#3f4657" /><rect data-hf-id="hf-ulii" x="5" y="23" width="4" height="2" fill="#dc2626" /><rect data-hf-id="hf-p7qf" x="11" y="23" width="4" height="2" fill="#dc2626" />
+          <rect data-hf-id="hf-u0ln" x="4" y="12" width="12" height="7" fill="#e11d48" /><rect data-hf-id="hf-ettr" x="3" y="13" width="3" height="6" fill="#9f1239" /><rect data-hf-id="hf-869v" x="14" y="13" width="3" height="6" fill="#9f1239" /><rect data-hf-id="hf-1bgc" x="5" y="12" width="2" height="8" fill="#fb7185" />
+          <rect data-hf-id="hf-q9hp" x="5" y="4" width="10" height="9" fill="#f4c6a1" /><rect data-hf-id="hf-vmqs" x="3" y="4" width="3" height="9" fill="#1a1a1e" /><rect data-hf-id="hf-rw5a" x="14" y="4" width="3" height="9" fill="#1a1a1e" /><rect data-hf-id="hf-1af1" x="5" y="2" width="10" height="4" fill="#1a1a1e" /><rect data-hf-id="hf-lpwm" x="6" y="7" width="2" height="2" fill="#fff" /><rect data-hf-id="hf-7ton" x="12" y="7" width="2" height="2" fill="#fff" /><rect data-hf-id="hf-7ri6" x="7" y="8" width="1" height="2" fill="#3f2a1d" /><rect data-hf-id="hf-twn2" x="12" y="8" width="1" height="2" fill="#3f2a1d" /><rect data-hf-id="hf-qxqw" x="9" y="11" width="3" height="1" fill="#c2416b" />
+        </symbol>
+        <symbol data-hf-id="hf-010w" id="sprite-chloe" viewBox="0 0 20 28">
+          <rect data-hf-id="hf-1a7n" x="6" y="18" width="3" height="5" fill="#f472b6" /><rect data-hf-id="hf-t7q7" x="11" y="18" width="3" height="5" fill="#f472b6" /><rect data-hf-id="hf-r079" x="5" y="23" width="4" height="2" fill="#92400e" /><rect data-hf-id="hf-55ce" x="11" y="23" width="4" height="2" fill="#92400e" />
+          <rect data-hf-id="hf-kb2b" x="4" y="12" width="12" height="7" fill="#a78bfa" /><rect data-hf-id="hf-9coi" x="3" y="13" width="3" height="6" fill="#7c3aed" /><rect data-hf-id="hf-e3fo" x="14" y="13" width="3" height="6" fill="#7c3aed" /><rect data-hf-id="hf-l1jv" x="8" y="14" width="4" height="1" fill="#ede9fe" />
+          <rect data-hf-id="hf-bqdp" x="5" y="4" width="10" height="9" fill="#f8cfae" /><rect data-hf-id="hf-dm4u" x="3" y="4" width="3" height="4" fill="#b45309" /><rect data-hf-id="hf-ngy0" x="2" y="2" width="4" height="4" fill="#e0892a" /><rect data-hf-id="hf-wch4" x="14" y="4" width="3" height="4" fill="#b45309" /><rect data-hf-id="hf-rapl" x="14" y="2" width="4" height="4" fill="#e0892a" /><rect data-hf-id="hf-hbze" x="6" y="7" width="2" height="2" fill="#fff" /><rect data-hf-id="hf-7fdm" x="12" y="7" width="2" height="2" fill="#fff" /><rect data-hf-id="hf-6ukz" x="7" y="8" width="1" height="2" fill="#7a5230" /><rect data-hf-id="hf-fttl" x="12" y="8" width="1" height="2" fill="#7a5230" /><rect data-hf-id="hf-rhrs" x="9" y="11" width="3" height="1" fill="#c2566f" />
+        </symbol>
+        <symbol data-hf-id="hf-ya9v" id="sprite-leo" viewBox="0 0 20 28">
+          <rect data-hf-id="hf-0xiy" x="6" y="18" width="3" height="5" fill="#111827" /><rect data-hf-id="hf-grrs" x="11" y="18" width="3" height="5" fill="#111827" /><rect data-hf-id="hf-qua5" x="5" y="23" width="4" height="2" fill="#14b8a6" /><rect data-hf-id="hf-iwjq" x="11" y="23" width="4" height="2" fill="#14b8a6" />
+          <rect data-hf-id="hf-rdfy" x="4" y="12" width="12" height="7" fill="#06b6d4" /><rect data-hf-id="hf-o9ak" x="3" y="13" width="3" height="6" fill="#0e7490" /><rect data-hf-id="hf-wapq" x="14" y="13" width="3" height="6" fill="#0e7490" /><rect data-hf-id="hf-tljn" x="8" y="12" width="4" height="2" fill="#67e8f9" />
+          <rect data-hf-id="hf-qfl0" x="5" y="4" width="10" height="9" fill="#f7c9a0" /><rect data-hf-id="hf-foqz" x="4" y="3" width="12" height="3" fill="#e5e7eb" /><rect data-hf-id="hf-llhu" x="5" y="2" width="8" height="2" fill="#fff" /><rect data-hf-id="hf-hqaf" x="6" y="7" width="2" height="2" fill="#fff" /><rect data-hf-id="hf-712l" x="12" y="7" width="2" height="2" fill="#fff" /><rect data-hf-id="hf-y9rq" x="7" y="8" width="1" height="2" fill="#1f8f9c" /><rect data-hf-id="hf-01l2" x="12" y="8" width="1" height="2" fill="#1f8f9c" /><rect data-hf-id="hf-69xh" x="9" y="11" width="3" height="1" fill="#9a4a3a" />
+        </symbol>
+      </svg>
+
+      <section data-hf-id="hf-j3q4" id="cabinet-scene" class="scene select-scene clip" data-start="0" data-duration="4" data-track-index="0">
+        <div data-hf-id="hf-7rgu" id="cabinet" class="cabinet">
+          <header data-hf-id="hf-7vo0" class="marquee">
+            <div data-hf-id="hf-zs8f" class="marquee-lights" data-layout-ignore="true"></div>
+            <h1 data-hf-id="hf-20qc" id="cabinet-title" class="wordmark">PIXEL HAVEN</h1>
+            <p data-hf-id="hf-f4p8" class="tagline">COZY 16-BIT CITY &amp; PROXIMITY CAFE</p>
+          </header>
+          <div data-hf-id="hf-xy9p" class="cabinet-body">
+            <p data-hf-id="hf-2ozf" id="roster-hint" class="roster-hint">Choose your wanderer — hover to preview, click to lock in</p>
+            <div data-hf-id="hf-vmep" class="roster">
+              <article data-hf-id="hf-is5b" id="selected-char" class="char-card alex selected">
+                <span data-hf-id="hf-rke4" class="selected-tag">SELECTED</span>
+                <svg data-hf-id="hf-hter" class="pixel-sprite" aria-label="Alex pixel character"><use data-hf-id="hf-e3qk" href="#sprite-alex" /></svg>
+                <span data-hf-id="hf-6ein" class="char-name">Alex</span><span data-hf-id="hf-4ceg" class="char-gender">Male</span><span data-hf-id="hf-dnka" class="char-title">Hoodie Wanderer</span>
+              </article>
+              <article data-hf-id="hf-bx3w" class="char-card maya">
+                <svg data-hf-id="hf-ojhf" class="pixel-sprite" aria-label="Maya pixel character"><use data-hf-id="hf-oabw" href="#sprite-maya" /></svg>
+                <span data-hf-id="hf-30gn" class="char-name">Maya</span><span data-hf-id="hf-v1g1" class="char-gender">Female</span><span data-hf-id="hf-r0zt" class="char-title">Midnight Biker</span>
+              </article>
+              <article data-hf-id="hf-hxmf" class="char-card chloe">
+                <svg data-hf-id="hf-nglw" class="pixel-sprite" aria-label="Chloe pixel character"><use data-hf-id="hf-e4yv" href="#sprite-chloe" /></svg>
+                <span data-hf-id="hf-q1y0" class="char-name">Chloe</span><span data-hf-id="hf-ibut" class="char-gender">Female</span><span data-hf-id="hf-7ld5" class="char-title">Knit &amp; Honey</span>
+              </article>
+              <article data-hf-id="hf-rtn4" class="char-card leo">
+                <svg data-hf-id="hf-0yr5" class="pixel-sprite" aria-label="Leo pixel character"><use data-hf-id="hf-vlhc" href="#sprite-leo" /></svg>
+                <span data-hf-id="hf-s7rt" class="char-name">Leo</span><span data-hf-id="hf-1pvk" class="char-gender">Male</span><span data-hf-id="hf-l1y3" class="char-title">Neon Courier</span>
+              </article>
+            </div>
+            <div data-hf-id="hf-znxy" class="spawn-wrap">
+              <div data-hf-id="hf-a6fn" class="spawn-ripple" id="spawn-ripple" data-layout-ignore="true"></div>
+              <div data-hf-id="hf-tgid" id="spawn-button" class="spawn-button">[ ▶ SPAWN AS ALEX (MALE) ]</div>
+            </div>
+          </div>
+        </div>
+        <svg data-hf-id="hf-s7mw" id="cursor" class="cursor" viewBox="0 0 36 48" aria-hidden="true"><path data-hf-id="hf-4jan" d="M3 2v38l10-10 7 15 7-4-7-14h13L3 2z" fill="#fff" stroke="#09070c" stroke-width="3" stroke-linejoin="round" /></svg>
+        <div data-hf-id="hf-5xzx" class="scanlines" data-layout-ignore="true"></div><div data-hf-id="hf-ipyj" class="vignette" data-layout-ignore="true"></div>
+      </section>
+
+      <section data-hf-id="hf-f2g1" id="city-scene" class="scene city-scene clip" data-start="4" data-duration="4" data-track-index="1">
+        <div data-hf-id="hf-7nl4" class="city-sky" data-layout-ignore="true"></div><div data-hf-id="hf-z721" class="starfield" data-layout-ignore="true"></div>
+        <div data-hf-id="hf-kb4a" class="moon-glow" data-layout-ignore="true"></div><div data-hf-id="hf-roy6" class="moon" data-layout-ignore="true"></div>
+        <div data-hf-id="hf-uxa0" class="skyline" data-layout-ignore="true"><div data-hf-id="hf-l58s" class="building one"></div><div data-hf-id="hf-8yqu" class="building two"></div><div data-hf-id="hf-n2qo" class="building three"></div><div data-hf-id="hf-qea4" class="building four"></div><div data-hf-id="hf-lzvk" class="building five"></div><div data-hf-id="hf-lnt4" class="building six"></div></div>
+        <div data-hf-id="hf-elgh" class="city-hud"><span data-hf-id="hf-8hdj" class="city-logo">☕ PIXEL HAVEN</span><div data-hf-id="hf-d3w8" class="city-states"><span data-hf-id="hf-4w70" class="city-state on">🌆 CITY</span><span data-hf-id="hf-1u7k" class="city-state">☕ CAFE</span><span data-hf-id="hf-ta64" class="city-state">🛋 BOOTH</span></div></div>
+        <div data-hf-id="hf-q0zl" class="shopfront left" data-layout-ignore="true"><div data-hf-id="hf-vxpm" class="shop-sign">OPEN LATE</div><div data-hf-id="hf-j1c1" class="shop-window"></div><div data-hf-id="hf-5w95" class="shop-door"></div></div>
+        <div data-hf-id="hf-a2ua" class="shopfront cafe" id="cafe-door"><div data-hf-id="hf-bwqg" class="shop-sign">PIXEL CAFE · 24H BREW</div><div data-hf-id="hf-9itx" class="shop-window"></div><div data-hf-id="hf-qph9" class="shop-door"></div></div>
+        <div data-hf-id="hf-xc3j" class="sidewalk" data-layout-ignore="true"></div><div data-hf-id="hf-k3l3" class="road" data-layout-ignore="true"></div>
+        <div data-hf-id="hf-dseb" class="lamp lamp-a" data-layout-ignore="true"></div><div data-hf-id="hf-bhdk" class="lamp lamp-b" data-layout-ignore="true"></div><div data-hf-id="hf-eamh" class="lamp lamp-c" data-layout-ignore="true"></div>
+        <div data-hf-id="hf-6s5h" id="walker" class="street-avatar"><svg data-hf-id="hf-yyaz" class="pixel-sprite" aria-label="Alex walking"><use data-hf-id="hf-h9ms" href="#sprite-alex" /></svg></div>
+        <div data-hf-id="hf-imv1" class="city-hint">Find the glowing cafe door</div>
+        <div data-hf-id="hf-d4z5" class="scanlines" data-layout-ignore="true"></div><div data-hf-id="hf-6c3v" class="vignette" data-layout-ignore="true"></div>
+      </section>
+
+      <section data-hf-id="hf-uvyy" id="cafe-scene" class="scene cafe-scene clip" data-start="8" data-duration="4" data-track-index="2">
+        <div data-hf-id="hf-1yix" class="cafe-wall" data-layout-ignore="true"></div><div data-hf-id="hf-5v1j" class="cafe-floor" data-layout-ignore="true"></div>
+        <div data-hf-id="hf-kql2" class="pendant a" data-layout-ignore="true"></div><div data-hf-id="hf-xwlh" class="pendant b" data-layout-ignore="true"></div><div data-hf-id="hf-chro" class="pendant c" data-layout-ignore="true"></div>
+        <div data-hf-id="hf-iak2" class="shelf" aria-hidden="true">🫙　🫖　🪴　🏺</div>
+        <h2 data-hf-id="hf-8237" id="cafe-sign" class="cafe-sign">PIXEL CAFE · 24H BREW</h2><div data-hf-id="hf-u5l5" class="cafe-trim" data-layout-ignore="true"></div>
+        <div data-hf-id="hf-9xle" id="counter" class="counter"><div data-hf-id="hf-0m5t" class="espresso" data-layout-ignore="true"></div><div data-hf-id="hf-lo45" class="pastry-case" data-layout-ignore="true"></div><div data-hf-id="hf-ctnt" class="counter-front">☕　COFFEE &amp; PASTRIES　☕</div></div>
+        <div data-hf-id="hf-x481" class="vip-chair left" data-layout-ignore="true"></div><div data-hf-id="hf-py1i" class="vip-chair right" data-layout-ignore="true"></div>
+        <div data-hf-id="hf-acea" id="vip-table" class="vip-table"><div data-hf-id="hf-aqce" class="table-top"></div><div data-hf-id="hf-77o7" class="table-leg"></div><span data-hf-id="hf-1rzm" class="micro-label" style="position:absolute;top:0;left:34%;color:#ffe9b0">VIP</span></div>
+        <div data-hf-id="hf-xr0t" id="cafe-walker" class="cafe-avatar"><svg data-hf-id="hf-056n" class="pixel-sprite" aria-label="Alex at the cafe"><use data-hf-id="hf-g2pp" href="#sprite-alex" /></svg></div>
+        <div data-hf-id="hf-sn3s" id="join-prompt" class="join-prompt"><span data-hf-id="hf-ngr2" class="join-key">E</span><span data-hf-id="hf-rfsq">Join VIP Table</span></div>
+        <div data-hf-id="hf-mlo5" class="city-hud"><span data-hf-id="hf-regn" class="city-logo">☕ PIXEL HAVEN</span><div data-hf-id="hf-139s" class="city-states"><span data-hf-id="hf-bd2d" class="city-state">🌆 CITY</span><span data-hf-id="hf-31nn" class="city-state on">☕ CAFE</span><span data-hf-id="hf-9tmc" class="city-state">🛋 BOOTH</span></div></div>
+        <div data-hf-id="hf-ebw8" class="scanlines" data-layout-ignore="true"></div><div data-hf-id="hf-5xsu" class="vignette" data-layout-ignore="true"></div>
+      </section>
+
+      <section data-hf-id="hf-aity" id="booth-scene" class="scene booth-scene clip" data-start="12" data-duration="8" data-track-index="3">
+        <div data-hf-id="hf-4ayb" class="booth-glow" data-layout-ignore="true"></div>
+        <div data-hf-id="hf-5cd8" class="booth-tag">🛋 VIP COFFEE BOOTH</div>
+        <div data-hf-id="hf-whg9" class="booth-stage">
+          <div data-hf-id="hf-os9d" id="booth-alex" class="booth-person"><div data-hf-id="hf-bzsc" class="booth-chairback" data-layout-ignore="true"></div><svg data-hf-id="hf-aa5e" class="pixel-sprite" aria-label="Alex seated"><use data-hf-id="hf-gh0q" href="#sprite-alex" /></svg><span data-hf-id="hf-fgqf" class="booth-name alex">Alex</span></div>
+          <div data-hf-id="hf-7bwg" id="booth-table" class="booth-table"><div data-hf-id="hf-wofh" class="booth-table-surface"></div><div data-hf-id="hf-u4ek" class="mug left"><span data-hf-id="hf-188n" class="steam"></span><span data-hf-id="hf-s1sl" class="steam two"></span></div><div data-hf-id="hf-7e3n" class="mug right"><span data-hf-id="hf-knhz" class="steam"></span><span data-hf-id="hf-yhjd" class="steam two"></span></div></div>
+          <div data-hf-id="hf-4max" id="booth-maya" class="booth-person"><div data-hf-id="hf-nts4" class="booth-chairback" data-layout-ignore="true"></div><svg data-hf-id="hf-5q3m" class="pixel-sprite" aria-label="Maya seated"><use data-hf-id="hf-m4x0" href="#sprite-maya" /></svg><span data-hf-id="hf-c1if" class="booth-name maya">Maya</span></div>
+        </div>
+        <div data-hf-id="hf-zuci" id="dialogue" class="dialogue">
+          <div data-hf-id="hf-j7kt" class="dialogue-head"><span data-hf-id="hf-vgi8" class="dialogue-title">&gt; COMETCHAT DIALOGUE TERMINAL</span><span data-hf-id="hf-rvaf" class="sample-label">SAMPLE CHAT · OFFLINE DEMO</span></div>
+          <div data-hf-id="hf-pxps" class="dialogue-lines">
+            <div data-hf-id="hf-g57u" id="message-a" class="message"><span data-hf-id="hf-z6vo" class="name alex">Alex</span><span data-hf-id="hf-wrf2" class="text">› Hey, Maya.</span></div>
+            <div data-hf-id="hf-c73t" id="message-b" class="message"><span data-hf-id="hf-3vt8" class="name maya">Maya</span><span data-hf-id="hf-cmm8" class="text">› Seat's saved.</span></div>
+          </div>
+        </div>
+        <div data-hf-id="hf-dxl7" class="scanlines" data-layout-ignore="true"></div><div data-hf-id="hf-5jht" class="vignette" data-layout-ignore="true"></div>
+      </section>
+
+      <section data-hf-id="hf-nz02" id="outro-scene" class="scene outro-scene clip" data-start="20" data-duration="3.5" data-track-index="4">
+        <div data-hf-id="hf-7vo2" id="outro-marquee" class="outro-marquee">
+          <div data-hf-id="hf-zsnz" id="outro-studs" class="outro-studs" data-layout-ignore="true"></div>
+          <div data-hf-id="hf-pkmt" class="outro-mark"><h2 data-hf-id="hf-k6gi" id="outro-title" class="wordmark">PIXEL HAVEN</h2><p data-hf-id="hf-xzus" id="outro-tagline" class="tagline">COZY 16-BIT CITY &amp; PROXIMITY CAFE</p></div>
+        </div>
+        <div data-hf-id="hf-by22" class="scanlines" data-layout-ignore="true"></div><div data-hf-id="hf-556s" class="vignette" data-layout-ignore="true"></div>
+      </section>
+
+      <audio data-hf-id="hf-3spg" id="music" src="assets/music/happy-beats-business-moves-vol-1-by-ende-dot-app.mp3" data-start="0" data-duration="23.5" data-track-index="10" data-volume="0.3" data-automation="{&quot;version&quot;:1,&quot;lanes&quot;:[{&quot;target&quot;:&quot;volume&quot;,&quot;points&quot;:[{&quot;t&quot;:0,&quot;v&quot;:0},{&quot;t&quot;:0.4,&quot;v&quot;:0.3},{&quot;t&quot;:23,&quot;v" :0.3},{&quot;t&quot;:23.5,&quot;v&quot;:0}]}]}"=""></audio>
+      <audio data-hf-id="hf-qxa5" id="selection-click" src="assets/sfx/interface/click_003.ogg" data-start="3.05" data-duration="0.01" data-track-index="11" data-volume="0.72"></audio>
+      <audio data-hf-id="hf-07m7" id="walk-step" src="assets/sfx/impact/footstep_wood_002.ogg" data-start="6.75" data-duration="0.25" data-track-index="11" data-volume="0.48"></audio>
+      <audio data-hf-id="hf-ka1n" id="terminal-hit" src="assets/sfx/impact/impactSoft_medium_001.ogg" data-start="17.02" data-duration="0.18" data-track-index="11" data-volume="0.65"></audio>
+      <audio data-hf-id="hf-mv5c" id="marquee-bell" src="assets/sfx/interface/bong_001.ogg" data-start="20.02" data-duration="0.12" data-track-index="11" data-volume="0.52"></audio>
+    </div>
+    <script>
+      const timeline = gsap.timeline({ paused: true });
+
+      timeline.fromTo("#cabinet", { scale: 0.965, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.55, ease: "power3.out" }, 0);
+      timeline.fromTo("#cabinet-title", { y: 22, opacity: 0 }, { y: 0, opacity: 1, duration: 0.52, ease: "power3.out" }, 0.2);
+      timeline.fromTo(".tagline", { y: 14, opacity: 0 }, { y: 0, opacity: 1, duration: 0.42, ease: "power2.out" }, 0.44);
+      timeline.fromTo("#roster-hint", { y: 12, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35, ease: "power2.out" }, 0.72);
+      timeline.fromTo(".char-card", { y: 32, scale: 0.94, opacity: 0 }, { y: 0, scale: 1, opacity: 1, duration: 0.48, stagger: 0.1, ease: "power3.out" }, 0.82);
+      timeline.fromTo("#spawn-button", { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.46, ease: "power3.out" }, 1.44);
+      timeline.to("#cursor", { x: -500, y: 46, duration: 0.56, ease: "power3.out" }, 2.35);
+      timeline.to("#cursor", { scale: 0.84, duration: 0.08, ease: "power2.in" }, 3.03);
+      timeline.to("#cursor", { scale: 1, duration: 0.12, ease: "power2.out" }, 3.11);
+      timeline.to("#spawn-button", { scale: 0.965, duration: 0.08, ease: "power2.in" }, 3.03);
+      timeline.to("#spawn-button", { scale: 1, duration: 0.12, ease: "power2.out" }, 3.11);
+      timeline.fromTo("#spawn-ripple", { scale: 0.1, opacity: 0.65 }, { scale: 2.2, opacity: 0, duration: 0.52, ease: "power2.out" }, 3.1);
+
+      timeline.fromTo(".city-logo", { x: -35, opacity: 0 }, { x: 0, opacity: 1, duration: 0.42, ease: "power3.out" }, 4.1);
+      timeline.fromTo(".city-hint", { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: 0.38, ease: "power2.out" }, 4.24);
+      timeline.fromTo("#cafe-door", { scale: 0.94, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.48, ease: "power3.out" }, 4.24);
+      timeline.fromTo("#walker", { x: 0 }, { x: 1080, duration: 3.25, ease: "none" }, 4.42);
+
+      timeline.fromTo("#cafe-sign", { y: -24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.44, ease: "power3.out" }, 8.15);
+      timeline.fromTo("#counter", { y: 28, opacity: 0 }, { y: 0, opacity: 1, duration: 0.48, ease: "power3.out" }, 8.32);
+      timeline.fromTo("#vip-table", { scale: 0.9, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.45, ease: "power3.out" }, 8.52);
+      timeline.fromTo("#cafe-walker", { x: 0 }, { x: 460, duration: 1.2, ease: "power2.inOut" }, 8.64);
+      timeline.fromTo("#join-prompt", { y: 18, scale: 0.92, opacity: 0 }, { y: 0, scale: 1, opacity: 1, duration: 0.4, ease: "power3.out" }, 10.15);
+      timeline.to("#join-prompt", { scale: 1.045, duration: 0.35, yoyo: true, repeat: 2, ease: "sine.inOut" }, 10.72);
+
+      timeline.fromTo("#booth-alex", { x: -100, opacity: 0 }, { x: 0, opacity: 1, duration: 0.65, ease: "power3.out" }, 12.18);
+      timeline.fromTo("#booth-maya", { x: 100, opacity: 0 }, { x: 0, opacity: 1, duration: 0.65, ease: "power3.out" }, 12.18);
+      timeline.fromTo("#booth-table", { y: 32, scale: 0.93, opacity: 0 }, { y: 0, scale: 1, opacity: 1, duration: 0.62, ease: "power3.out" }, 12.42);
+      timeline.fromTo(".steam", { y: 0, opacity: 0 }, { y: -58, opacity: 0.62, duration: 1.25, stagger: 0.25, repeat: 3, ease: "sine.out" }, 13.1);
+      timeline.fromTo("#dialogue", { y: 46, opacity: 0 }, { y: 0, opacity: 1, duration: 0.46, ease: "power3.out" }, 17.02);
+      timeline.fromTo("#message-a", { x: -24, opacity: 0 }, { x: 0, opacity: 1, duration: 0.34, ease: "power2.out" }, 17.52);
+      timeline.fromTo("#message-b", { x: -24, opacity: 0 }, { x: 0, opacity: 1, duration: 0.34, ease: "power2.out" }, 18.52);
+
+      timeline.fromTo("#outro-marquee", { scale: 0.94, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.62, ease: "power3.out" }, 20);
+      timeline.fromTo("#outro-title", { y: -30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.58, ease: "power3.out" }, 20.18);
+      timeline.fromTo("#outro-tagline", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.48, ease: "power2.out" }, 20.44);
+      timeline.to("#outro-studs", { opacity: 0.48, duration: 0.65, repeat: 2, yoyo: true, ease: "sine.inOut" }, 21.45);
+
+      window.__timelines["main"] = timeline;
+    </script>
+  </body>
+</html>

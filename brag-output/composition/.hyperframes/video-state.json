@@ -1,0 +1,371 @@
+{
+  "version": 1,
+  "historyId": "fe9c5f6d-b4bb-4086-872a-084e187d7d5a",
+  "currentRevision": "715a392c-bd4f-4cdf-a9e6-fd46bb4264ee",
+  "pendingChanges": false,
+  "files": {
+    "AGENTS.md": {
+      "hash": "1d4f0c8ca2507b94fd7c9df709fff01416adbd51a0f922b9d6ed2f40129147d5",
+      "content": "C:\\Users\\Anushka Gupta\\.cache\\hyperframes\\history\\fe9c5f6d-b4bb-4086-872a-084e187d7d5a\\blobs\\1d\\1d4f0c8ca2507b94fd7c9df709fff01416adbd51a0f922b9d6ed2f40129147d5"
+    },
+    "CLAUDE.md": {
+      "hash": "1d4f0c8ca2507b94fd7c9df709fff01416adbd51a0f922b9d6ed2f40129147d5",
+      "content": "C:\\Users\\Anushka Gupta\\.cache\\hyperframes\\history\\fe9c5f6d-b4bb-4086-872a-084e187d7d5a\\blobs\\1d\\1d4f0c8ca2507b94fd7c9df709fff01416adbd51a0f922b9d6ed2f40129147d5"
+    },
+    "assets/music/cues/happy-beats-business-moves-vol-1-by-ende-dot-app.music-cues.json": {
+      "hash": "5c7f0a3f815f7928d4e2cda498cf676752984336e952b066a40448a91ec471e6",
+      "content": "C:\\Users\\Anushka Gupta\\.cache\\hyperframes\\history\\fe9c5f6d-b4bb-4086-872a-084e187d7d5a\\blobs\\5c\\5c7f0a3f815f7928d4e2cda498cf676752984336e952b066a40448a91ec471e6"
+    },
+    "assets/music/cues/happy-beats-business-moves-vol-1-by-ende-dot-app.music-cues.md": {
+      "hash": "257b97c78fb08c929618d39efd677187f4ce7f44b56cacea5b739718d64552b6",
+      "content": "C:\\Users\\Anushka Gupta\\.cache\\hyperframes\\history\\fe9c5f6d-b4bb-4086-872a-084e187d7d5a\\blobs\\25\\257b97c78fb08c929618d39efd677187f4ce7f44b56cacea5b739718d64552b6"
+    },
+    "assets/sfx/impact/footstep_wood_002.ogg": {
+      "hash": "9ff095b05cee5eec40b081defe3f0eef7232bb16d4865ce03b9f6dbab875cfdd",
+      "content": "C:\\Users\\Anushka Gupta\\.cache\\hyperframes\\history\\fe9c5f6d-b4bb-4086-872a-084e187d7d5a\\blobs\\9f\\9ff095b05cee5eec40b081defe3f0eef7232bb16d4865ce03b9f6dbab875cfdd"
+    },
+    "assets/sfx/impact/impactSoft_medium_001.ogg": {
+      "hash": "7642a4fd43e547afe4f7adfadb3dabb681c0ff512f52c1674bae30a726841faf",
+      "content": "C:\\Users\\Anushka Gupta\\.cache\\hyperframes\\history\\fe9c5f6d-b4bb-4086-872a-084e187d7d5a\\blobs\\76\\7642a4fd43e547afe4f7adfadb3dabb681c0ff512f52c1674bae30a726841faf"
+    },
+    "assets/sfx/interface/bong_001.ogg": {
+      "hash": "d21d0f0b782445db579d11e2506b24cd1ac9d664ee33aeaf807761aa7b6fd710",
+      "content": "C:\\Users\\Anushka Gupta\\.cache\\hyperframes\\history\\fe9c5f6d-b4bb-4086-872a-084e187d7d5a\\blobs\\d2\\d21d0f0b782445db579d11e2506b24cd1ac9d664ee33aeaf807761aa7b6fd710"
+    },
+    "assets/sfx/interface/click_003.ogg": {
+      "hash": "2fa929138bc3a0f432696588f66eac94b8f6d463905ec8808c6461ce4b054292",
+      "content": "C:\\Users\\Anushka Gupta\\.cache\\hyperframes\\history\\fe9c5f6d-b4bb-4086-872a-084e187d7d5a\\blobs\\2f\\2fa929138bc3a0f432696588f66eac94b8f6d463905ec8808c6461ce4b054292"
+    },
+    "hyperframes.json": {
+      "hash": "53dbce1e19aa713cbb12ee0bc4d206143b45ab15e6ffbfcaa8f69572d4d24d50",
+      "content": "C:\\Users\\Anushka Gupta\\.cache\\hyperframes\\history\\fe9c5f6d-b4bb-4086-872a-084e187d7d5a\\blobs\\53\\53dbce1e19aa713cbb12ee0bc4d206143b45ab15e6ffbfcaa8f69572d4d24d50"
+    },
+    "index.html": {
+      "hash": "74148117a728ee32174f4616d526d7ff4a9bc4d4fb5304399992da0f8c51bcd4",
+      "content": "C:\\Users\\Anushka Gupta\\.cache\\hyperframes\\history\\fe9c5f6d-b4bb-4086-872a-084e187d7d5a\\blobs\\74\\74148117a728ee32174f4616d526d7ff4a9bc4d4fb5304399992da0f8c51bcd4"
+    },
+    "index.motion.json": {
+      "hash": "08dd5f3b242b616a473ff387ddbe50dbdaa2f4424ac4bfefbf4fd615fcec0531",
+      "content": "C:\\Users\\Anushka Gupta\\.cache\\hyperframes\\history\\fe9c5f6d-b4bb-4086-872a-084e187d7d5a\\blobs\\08\\08dd5f3b242b616a473ff387ddbe50dbdaa2f4424ac4bfefbf4fd615fcec0531"
+    },
+    "meta.json": {
+      "hash": "fac826df8ce7872975e85633a064880a0f949cf7ca71dc8f6111ca5355996c38",
+      "content": "C:\\Users\\Anushka Gupta\\.cache\\hyperframes\\history\\fe9c5f6d-b4bb-4086-872a-084e187d7d5a\\blobs\\fa\\fac826df8ce7872975e85633a064880a0f949cf7ca71dc8f6111ca5355996c38"
+    },
+    "package.json": {
+      "hash": "794c13e538a4ff7220005754e4ec9b62f09d94080b812abb6430a484ad0d823e",
+      "content": "C:\\Users\\Anushka Gupta\\.cache\\hyperframes\\history\\fe9c5f6d-b4bb-4086-872a-084e187d7d5a\\blobs\\79\\794c13e538a4ff7220005754e4ec9b62f09d94080b812abb6430a484ad0d823e"
+    },
+    "assets/music/happy-beats-business-moves-vol-1-by-ende-dot-app.mp3": {
+      "hash": "aa56ab1cdcbef6b05566c6a7c114323078580ccf6a740a9e6c6b6c4b40b4389f",
+      "content": "C:\\Users\\Anushka Gupta\\.cache\\hyperframes\\history\\fe9c5f6d-b4bb-4086-872a-084e187d7d5a\\blobs\\aa\\aa56ab1cdcbef6b05566c6a7c114323078580ccf6a740a9e6c6b6c4b40b4389f"
+    }
+  },
+  "revisions": {
+    "db25d2a0-7507-4c5e-8a53-e4c04c8bb807": {
+      "actor": {
+        "kind": "outside",
+        "name": "Outside"
+      },
+      "label": "Changed outside the app",
+      "startedAt": 1791921762954,
+      "endedAt": 1791921762956,
+      "files": {
+        "index.html": {
+          "before": "C:\\Users\\Anushka Gupta\\.cache\\hyperframes\\history\\fe9c5f6d-b4bb-4086-872a-084e187d7d5a\\blobs\\52\\5213db0afea64f56a954609e2ee2d030fae5698690a518a0fe68109706f23c2e",
+          "after": "C:\\Users\\Anushka Gupta\\.cache\\hyperframes\\history\\fe9c5f6d-b4bb-4086-872a-084e187d7d5a\\blobs\\9e\\9ed3adf5791aaa2c4c3c465b27c784d5ee182f643c7e633d1e709a01b4b07f24"
+        }
+      }
+    },
+    "715a392c-bd4f-4cdf-a9e6-fd46bb4264ee": {
+      "actor": {
+        "kind": "outside",
+        "name": "Outside"
+      },
+      "label": "Changed outside the app",
+      "startedAt": 1791921966988,
+      "endedAt": 1791921966999,
+      "files": {
+        "index.html": {
+          "before": "C:\\Users\\Anushka Gupta\\.cache\\hyperframes\\history\\fe9c5f6d-b4bb-4086-872a-084e187d7d5a\\blobs\\9e\\9ed3adf5791aaa2c4c3c465b27c784d5ee182f643c7e633d1e709a01b4b07f24",
+          "after": "C:\\Users\\Anushka Gupta\\.cache\\hyperframes\\history\\fe9c5f6d-b4bb-4086-872a-084e187d7d5a\\blobs\\74\\74148117a728ee32174f4616d526d7ff4a9bc4d4fb5304399992da0f8c51bcd4"
+        }
+      }
+    }
+  },
+  "checks": {
+    "latest": {
+      "revision": "db25d2a0-7507-4c5e-8a53-e4c04c8bb807",
+      "id": "f15bb236-fd78-4da5-9567-78da4d4e3246"
+    },
+    "revisions": {
+      "db25d2a0-7507-4c5e-8a53-e4c04c8bb807": [
+        {
+          "id": "f15bb236-fd78-4da5-9567-78da4d4e3246",
+          "scope": "project",
+          "report": "C:\\Users\\Anushka Gupta\\OneDrive\\Documents\\comethack\\zerotochat\\brag-output\\composition\\.hyperframes\\artifacts\\checks\\f15bb236-fd78-4da5-9567-78da4d4e3246.json",
+          "metadata": {
+            "ok": true,
+            "browserSkipped": false,
+            "options": {
+              "samples": 9,
+              "atTransitions": false,
+              "maxIssues": 80,
+              "collapseStatic": true,
+              "tolerance": 2,
+              "timeout": 3000,
+              "contrast": true,
+              "strict": false,
+              "snapshots": true,
+              "browserGpuMode": "auto"
+            }
+          },
+          "createdAt": 1791921836680,
+          "contentHash": "42424ce025a275ee46fa069306a5b86d84f90164dcaf95193b8c060e1f9368bd",
+          "revision": "db25d2a0-7507-4c5e-8a53-e4c04c8bb807",
+          "inputFingerprint": "9b6fb5a4ef93f3c9dc77efe953a5ac83058a666e2df98ce472876f0c421a2a2e",
+          "inputScope": "local-project-files",
+          "attribution": "recorded-revision"
+        }
+      ]
+    },
+    "unversioned": [
+      {
+        "id": "65ce00ba-55d4-45d5-a76e-37f04e58c9cd",
+        "scope": "project",
+        "report": "C:\\Users\\Anushka Gupta\\OneDrive\\Documents\\comethack\\zerotochat\\brag-output\\composition\\.hyperframes\\artifacts\\checks\\65ce00ba-55d4-45d5-a76e-37f04e58c9cd.json",
+        "metadata": {
+          "ok": false,
+          "browserSkipped": false,
+          "options": {
+            "samples": 9,
+            "atTransitions": false,
+            "maxIssues": 80,
+            "collapseStatic": true,
+            "tolerance": 2,
+            "timeout": 3000,
+            "contrast": true,
+            "strict": false,
+            "snapshots": true,
+            "browserGpuMode": "auto"
+          }
+        },
+        "createdAt": 1791921388600,
+        "contentHash": "5ba684fa1befc5b1292e663f87a3d089ddae902f9ecfd9f249def7548c232cb5",
+        "revision": null,
+        "inputFingerprint": "82175ab6922ca222591d9715f51198f74cc2b8002cab1f3c49fdd15a7f3f9726",
+        "inputScope": "local-project-files",
+        "attribution": "unversioned"
+      }
+    ]
+  },
+  "snapshots": {
+    "latest": {
+      "revision": "db25d2a0-7507-4c5e-8a53-e4c04c8bb807",
+      "id": "f15bb236-fd78-4da5-9567-78da4d4e3246-4"
+    },
+    "revisions": {
+      "db25d2a0-7507-4c5e-8a53-e4c04c8bb807": [
+        {
+          "id": "f15bb236-fd78-4da5-9567-78da4d4e3246-0",
+          "scope": "full",
+          "image": "C:\\Users\\Anushka Gupta\\OneDrive\\Documents\\comethack\\zerotochat\\brag-output\\composition\\.hyperframes\\artifacts\\snapshots\\b94242b1-075f-4d0b-9376-5865cc167a87\\frame-00-at-1.3s.png",
+          "time": 1.306,
+          "metadata": {
+            "checkId": "f15bb236-fd78-4da5-9567-78da4d4e3246",
+            "width": 1920,
+            "height": 1080
+          },
+          "createdAt": 1791921836680,
+          "contentHash": "6af2e30bf2a83a254300538895ab1c42d1726b9fe3d8e4aa7a7cacd5ead0439a",
+          "revision": "db25d2a0-7507-4c5e-8a53-e4c04c8bb807",
+          "inputFingerprint": "9b6fb5a4ef93f3c9dc77efe953a5ac83058a666e2df98ce472876f0c421a2a2e",
+          "inputScope": "local-project-files",
+          "attribution": "recorded-revision"
+        },
+        {
+          "id": "f15bb236-fd78-4da5-9567-78da4d4e3246-1",
+          "scope": "full",
+          "image": "C:\\Users\\Anushka Gupta\\OneDrive\\Documents\\comethack\\zerotochat\\brag-output\\composition\\.hyperframes\\artifacts\\snapshots\\b94242b1-075f-4d0b-9376-5865cc167a87\\frame-01-at-6.5s.png",
+          "time": 6.528,
+          "metadata": {
+            "checkId": "f15bb236-fd78-4da5-9567-78da4d4e3246",
+            "width": 1920,
+            "height": 1080
+          },
+          "createdAt": 1791921836681,
+          "contentHash": "aa343a906439d2bd83f8ba16607e6f8e03c0da42af5536e267758d750912d394",
+          "revision": "db25d2a0-7507-4c5e-8a53-e4c04c8bb807",
+          "inputFingerprint": "9b6fb5a4ef93f3c9dc77efe953a5ac83058a666e2df98ce472876f0c421a2a2e",
+          "inputScope": "local-project-files",
+          "attribution": "recorded-revision"
+        },
+        {
+          "id": "f15bb236-fd78-4da5-9567-78da4d4e3246-2",
+          "scope": "full",
+          "image": "C:\\Users\\Anushka Gupta\\OneDrive\\Documents\\comethack\\zerotochat\\brag-output\\composition\\.hyperframes\\artifacts\\snapshots\\b94242b1-075f-4d0b-9376-5865cc167a87\\frame-02-at-11.8s.png",
+          "time": 11.75,
+          "metadata": {
+            "checkId": "f15bb236-fd78-4da5-9567-78da4d4e3246",
+            "width": 1920,
+            "height": 1080
+          },
+          "createdAt": 1791921836681,
+          "contentHash": "935fdcce89f3a57bf70ff13f8b407ce43a4c16cdd9ca521e836d9011cfb8b539",
+          "revision": "db25d2a0-7507-4c5e-8a53-e4c04c8bb807",
+          "inputFingerprint": "9b6fb5a4ef93f3c9dc77efe953a5ac83058a666e2df98ce472876f0c421a2a2e",
+          "inputScope": "local-project-files",
+          "attribution": "recorded-revision"
+        },
+        {
+          "id": "f15bb236-fd78-4da5-9567-78da4d4e3246-3",
+          "scope": "full",
+          "image": "C:\\Users\\Anushka Gupta\\OneDrive\\Documents\\comethack\\zerotochat\\brag-output\\composition\\.hyperframes\\artifacts\\snapshots\\b94242b1-075f-4d0b-9376-5865cc167a87\\frame-03-at-17.0s.png",
+          "time": 16.972,
+          "metadata": {
+            "checkId": "f15bb236-fd78-4da5-9567-78da4d4e3246",
+            "width": 1920,
+            "height": 1080
+          },
+          "createdAt": 1791921836682,
+          "contentHash": "11d2690b12aa10586af2b7d835dbc2dd0c21aed88cc0cbbd8ff9e7a6c14e225e",
+          "revision": "db25d2a0-7507-4c5e-8a53-e4c04c8bb807",
+          "inputFingerprint": "9b6fb5a4ef93f3c9dc77efe953a5ac83058a666e2df98ce472876f0c421a2a2e",
+          "inputScope": "local-project-files",
+          "attribution": "recorded-revision"
+        },
+        {
+          "id": "f15bb236-fd78-4da5-9567-78da4d4e3246-4",
+          "scope": "full",
+          "image": "C:\\Users\\Anushka Gupta\\OneDrive\\Documents\\comethack\\zerotochat\\brag-output\\composition\\.hyperframes\\artifacts\\snapshots\\b94242b1-075f-4d0b-9376-5865cc167a87\\frame-04-at-22.2s.png",
+          "time": 22.194,
+          "metadata": {
+            "checkId": "f15bb236-fd78-4da5-9567-78da4d4e3246",
+            "width": 1920,
+            "height": 1080
+          },
+          "createdAt": 1791921836682,
+          "contentHash": "51271b99b2ab731ce0fc045ff159adf893add306dafdc2db3e875cb7b39a8628",
+          "revision": "db25d2a0-7507-4c5e-8a53-e4c04c8bb807",
+          "inputFingerprint": "9b6fb5a4ef93f3c9dc77efe953a5ac83058a666e2df98ce472876f0c421a2a2e",
+          "inputScope": "local-project-files",
+          "attribution": "recorded-revision"
+        }
+      ]
+    },
+    "unversioned": [
+      {
+        "id": "65ce00ba-55d4-45d5-a76e-37f04e58c9cd-0",
+        "scope": "full",
+        "image": "C:\\Users\\Anushka Gupta\\OneDrive\\Documents\\comethack\\zerotochat\\brag-output\\composition\\.hyperframes\\artifacts\\snapshots\\812809fd-abce-42e8-9373-1b01af0e677d\\frame-00-at-1.3s.png",
+        "time": 1.306,
+        "metadata": {
+          "checkId": "65ce00ba-55d4-45d5-a76e-37f04e58c9cd",
+          "width": 1920,
+          "height": 1080
+        },
+        "createdAt": 1791921388600,
+        "contentHash": "b2e36f0c0ff6fc6119a8cc81aef520357d19af218de35f502a254596d44e2308",
+        "revision": null,
+        "inputFingerprint": "82175ab6922ca222591d9715f51198f74cc2b8002cab1f3c49fdd15a7f3f9726",
+        "inputScope": "local-project-files",
+        "attribution": "unversioned"
+      },
+      {
+        "id": "65ce00ba-55d4-45d5-a76e-37f04e58c9cd-1",
+        "scope": "full",
+        "image": "C:\\Users\\Anushka Gupta\\OneDrive\\Documents\\comethack\\zerotochat\\brag-output\\composition\\.hyperframes\\artifacts\\snapshots\\812809fd-abce-42e8-9373-1b01af0e677d\\frame-01-at-6.5s.png",
+        "time": 6.528,
+        "metadata": {
+          "checkId": "65ce00ba-55d4-45d5-a76e-37f04e58c9cd",
+          "width": 1920,
+          "height": 1080
+        },
+        "createdAt": 1791921388600,
+        "contentHash": "aa343a906439d2bd83f8ba16607e6f8e03c0da42af5536e267758d750912d394",
+        "revision": null,
+        "inputFingerprint": "82175ab6922ca222591d9715f51198f74cc2b8002cab1f3c49fdd15a7f3f9726",
+        "inputScope": "local-project-files",
+        "attribution": "unversioned"
+      },
+      {
+        "id": "65ce00ba-55d4-45d5-a76e-37f04e58c9cd-2",
+        "scope": "full",
+        "image": "C:\\Users\\Anushka Gupta\\OneDrive\\Documents\\comethack\\zerotochat\\brag-output\\composition\\.hyperframes\\artifacts\\snapshots\\812809fd-abce-42e8-9373-1b01af0e677d\\frame-02-at-11.8s.png",
+        "time": 11.75,
+        "metadata": {
+          "checkId": "65ce00ba-55d4-45d5-a76e-37f04e58c9cd",
+          "width": 1920,
+          "height": 1080
+        },
+        "createdAt": 1791921388600,
+        "contentHash": "935fdcce89f3a57bf70ff13f8b407ce43a4c16cdd9ca521e836d9011cfb8b539",
+        "revision": null,
+        "inputFingerprint": "82175ab6922ca222591d9715f51198f74cc2b8002cab1f3c49fdd15a7f3f9726",
+        "inputScope": "local-project-files",
+        "attribution": "unversioned"
+      },
+      {
+        "id": "65ce00ba-55d4-45d5-a76e-37f04e58c9cd-3",
+        "scope": "full",
+        "image": "C:\\Users\\Anushka Gupta\\OneDrive\\Documents\\comethack\\zerotochat\\brag-output\\composition\\.hyperframes\\artifacts\\snapshots\\812809fd-abce-42e8-9373-1b01af0e677d\\frame-03-at-17.0s.png",
+        "time": 16.972,
+        "metadata": {
+          "checkId": "65ce00ba-55d4-45d5-a76e-37f04e58c9cd",
+          "width": 1920,
+          "height": 1080
+        },
+        "createdAt": 1791921388601,
+        "contentHash": "11d2690b12aa10586af2b7d835dbc2dd0c21aed88cc0cbbd8ff9e7a6c14e225e",
+        "revision": null,
+        "inputFingerprint": "82175ab6922ca222591d9715f51198f74cc2b8002cab1f3c49fdd15a7f3f9726",
+        "inputScope": "local-project-files",
+        "attribution": "unversioned"
+      },
+      {
+        "id": "65ce00ba-55d4-45d5-a76e-37f04e58c9cd-4",
+        "scope": "full",
+        "image": "C:\\Users\\Anushka Gupta\\OneDrive\\Documents\\comethack\\zerotochat\\brag-output\\composition\\.hyperframes\\artifacts\\snapshots\\812809fd-abce-42e8-9373-1b01af0e677d\\frame-04-at-22.2s.png",
+        "time": 22.194,
+        "metadata": {
+          "checkId": "65ce00ba-55d4-45d5-a76e-37f04e58c9cd",
+          "width": 1920,
+          "height": 1080
+        },
+        "createdAt": 1791921388601,
+        "contentHash": "ddeeba3db92bedf51c51b1621200dc394180ecddab0ebf46edcc83c4889305ba",
+        "revision": null,
+        "inputFingerprint": "82175ab6922ca222591d9715f51198f74cc2b8002cab1f3c49fdd15a7f3f9726",
+        "inputScope": "local-project-files",
+        "attribution": "unversioned"
+      },
+      {
+        "id": "65ce00ba-55d4-45d5-a76e-37f04e58c9cd-crop-0",
+        "scope": "finding",
+        "image": "C:\\Users\\Anushka Gupta\\OneDrive\\Documents\\comethack\\zerotochat\\brag-output\\composition\\.hyperframes\\artifacts\\snapshots\\812809fd-abce-42e8-9373-1b01af0e677d\\finding-00-text_box_overflow.png",
+        "time": 1.306,
+        "metadata": {
+          "checkId": "65ce00ba-55d4-45d5-a76e-37f04e58c9cd",
+          "finding": {
+            "filename": "finding-00-text_box_overflow.png",
+            "time": 1.306,
+            "bbox": {
+              "x": 630.13,
+              "y": 75.5,
+              "width": 659.75,
+              "height": 98
+            }
+          },
+          "width": 2124,
+          "height": 438
+        },
+        "createdAt": 1791921388601,
+        "contentHash": "2193da417268663953752321ff081e88052e6651b5268be5da1563b102ce2a09",
+        "revision": null,
+        "inputFingerprint": "82175ab6922ca222591d9715f51198f74cc2b8002cab1f3c49fdd15a7f3f9726",
+        "inputScope": "local-project-files",
+        "attribution": "unversioned"
+      }
+    ]
+  }
+}

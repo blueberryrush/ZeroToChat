@@ -1,0 +1,13 @@
+{
+  "duration": 23.5,
+  "assertions": [
+    { "kind": "appearsBy", "selector": "#cabinet", "bySec": 0.8 },
+    { "kind": "appearsBy", "selector": "#walker", "bySec": 5 },
+    { "kind": "before", "a": "#cabinet", "b": "#walker" },
+    { "kind": "before", "a": "#walker", "b": "#join-prompt" },
+    { "kind": "before", "a": "#join-prompt", "b": "#dialogue" },
+    { "kind": "appearsBy", "selector": "#message-a", "bySec": 18 },
+    { "kind": "appearsBy", "selector": "#message-b", "bySec": 19 },
+    { "kind": "appearsBy", "selector": "#outro-title", "bySec": 21 }
+  ]
+}

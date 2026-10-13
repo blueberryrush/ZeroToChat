@@ -1,0 +1,174 @@
+{
+  "ok": true,
+  "strict": false,
+  "browserSkipped": false,
+  "lint": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 5,
+    "infoCount": 0,
+    "findings": [
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<section id=\"cabinet-scene\"> is a timeline element that contains nested <div id=\"cabinet\">. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#cabinet-scene",
+        "dataAttributes": {},
+        "sourceFile": "C:\\Users\\Anushka Gupta\\OneDrive\\Documents\\comethack\\zerotochat\\brag-output\\composition\\index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <section id=\"cabinet-scene\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<section id=\"city-scene\"> is a timeline element that contains nested <div>. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#city-scene",
+        "dataAttributes": {},
+        "sourceFile": "C:\\Users\\Anushka Gupta\\OneDrive\\Documents\\comethack\\zerotochat\\brag-output\\composition\\index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <section id=\"city-scene\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<section id=\"cafe-scene\"> is a timeline element that contains nested <div>. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#cafe-scene",
+        "dataAttributes": {},
+        "sourceFile": "C:\\Users\\Anushka Gupta\\OneDrive\\Documents\\comethack\\zerotochat\\brag-output\\composition\\index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <section id=\"cafe-scene\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<section id=\"booth-scene\"> is a timeline element that contains nested <div>. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#booth-scene",
+        "dataAttributes": {},
+        "sourceFile": "C:\\Users\\Anushka Gupta\\OneDrive\\Documents\\comethack\\zerotochat\\brag-output\\composition\\index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <section id=\"booth-scene\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      },
+      {
+        "code": "nested_structure_needs_subcomposition",
+        "severity": "warning",
+        "message": "<section id=\"outro-scene\"> is a timeline element that contains nested <div id=\"outro-marquee\">. The timeline shows one row per top-level element, and the root composition is built only from sub-compositions.",
+        "selector": "#outro-scene",
+        "dataAttributes": {},
+        "sourceFile": "C:\\Users\\Anushka Gupta\\OneDrive\\Documents\\comethack\\zerotochat\\brag-output\\composition\\index.html",
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "time": 0,
+        "fixHint": "Move <section id=\"outro-scene\"> and its contents into a sub-composition file and mount it with data-composition-src."
+      }
+    ],
+    "filesScanned": 1
+  },
+  "runtime": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": []
+  },
+  "layout": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "duration": 23.5,
+    "samples": [
+      1.306,
+      3.917,
+      6.528,
+      9.139,
+      11.75,
+      14.361,
+      16.972,
+      19.583,
+      22.194
+    ],
+    "transitionSamples": [],
+    "transitionSamplesDropped": 0,
+    "tolerance": 2,
+    "totalIssueCount": 0,
+    "truncated": false
+  },
+  "motion": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "enabled": true,
+    "specPath": "C:\\Users\\Anushka Gupta\\OneDrive\\Documents\\comethack\\zerotochat\\brag-output\\composition\\index.motion.json",
+    "samples": 300
+  },
+  "contrast": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "enabled": true,
+    "samples": [
+      1.306,
+      6.528,
+      11.75,
+      16.972,
+      22.194
+    ],
+    "checked": 37,
+    "passed": 37
+  },
+  "hdr": {
+    "autoPromotion": null,
+    "inspection": "available"
+  },
+  "snapshots": {
+    "enabled": true,
+    "files": [
+      ".hyperframes\\artifacts\\snapshots\\b94242b1-075f-4d0b-9376-5865cc167a87\\frame-00-at-1.3s.png",
+      ".hyperframes\\artifacts\\snapshots\\b94242b1-075f-4d0b-9376-5865cc167a87\\frame-01-at-6.5s.png",
+      ".hyperframes\\artifacts\\snapshots\\b94242b1-075f-4d0b-9376-5865cc167a87\\frame-02-at-11.8s.png",
+      ".hyperframes\\artifacts\\snapshots\\b94242b1-075f-4d0b-9376-5865cc167a87\\frame-03-at-17.0s.png",
+      ".hyperframes\\artifacts\\snapshots\\b94242b1-075f-4d0b-9376-5865cc167a87\\frame-04-at-22.2s.png"
+    ],
+    "times": [
+      1.306,
+      6.528,
+      11.75,
+      16.972,
+      22.194
+    ],
+    "findingFiles": []
+  }
+}
